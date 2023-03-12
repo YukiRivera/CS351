@@ -1,7 +1,6 @@
 /*
 
 */
-
 #include <LiquidCrystal.h>
 #include "scoreboard.h"
 
@@ -21,11 +20,12 @@ int setScoreRight = 0;
 // Centralized on board
 LiquidCrystal lcd(5, 6, 7, 8, 9, 10);
 
-// variable to keep track of the server
+// variable to keep track of the server, PlayerA, PlayerB and the winner.
 // The initial server starts from the left
 int server = -1;
 int playerA = -1;
 int playerB = 1;
+int winner = 0;
 
 // variable to keep track of score increments
 // (every two points the server changes)
@@ -59,15 +59,8 @@ void setup()
 
 void loop()
 {
-  /***Lights up the LED for the current server ***/
-  if(server == -1){
-    digitalWrite(ledPin1, HIGH);
-    digitalWrite(ledPin2, LOW);
-  }
-  else if(server == 1){
-    digitalWrite(ledPin1, LOW);
-    digitalWrite(ledPin2, HIGH);
-  }
+  // Lights up the LED on the side of the current server
+  turnOnServerLED();
   
 //prepping button states
   int buttonStateLeftPlus;  
@@ -270,6 +263,23 @@ void loop()
   }
 
 }
+
+
+//////////Helper Functions/////////
+/**
+Lights up the LED for the current server.
+*/
+void turnOnServerLED(){  
+  if(server == -1){
+    digitalWrite(ledPin1, HIGH);
+    digitalWrite(ledPin2, LOW);
+  }
+  else if(server == 1){
+    digitalWrite(ledPin1, LOW);
+    digitalWrite(ledPin2, HIGH);
+  }
+}
+
 
 void swapScoreboard() {
     int temp = gameScoreLeft;

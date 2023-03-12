@@ -140,9 +140,7 @@ void loop()
  
     swapScoreboard();
 
-    /***switch the side***/
-    playerA *=(-1);
-    playerB *=(-1);
+    swapPlayerSide();
 
     gameScore = setScore(gameScoreLeft, gameScoreRight);
     setPoint = setScore(setScoreLeft, setScoreRight); 
@@ -168,12 +166,10 @@ void loop()
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
 
-    swapScoreboard();    
+    swapScoreboard();  
 
-    /***switch the side***/
-    playerA *=(-1);
-    playerB *=(-1);
-    
+    swapPlayerSide();  
+
     gameScore = setScore(gameScoreLeft, gameScoreRight);
     setPoint = setScore(setScoreLeft, setScoreRight); 
     
@@ -299,6 +295,14 @@ int checkCountIncrement(){
     }
 }
 
+/**
+Swap the sides at each player plays the game by multiplying 
+each player value by (-1)
+*/
+void swapPlayerSide(){
+  playerA *=(-1);
+  playerB *=(-1);
+}
 
 void swapScoreboard() {
     int temp = gameScoreLeft;

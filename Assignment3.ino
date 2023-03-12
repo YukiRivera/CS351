@@ -87,19 +87,7 @@ void loop()
   //      and update score board".
   /*** when the server button is pressed, it displays who is serving***/
   if(serverButtonState == LOW) {
-    lcd.clear();
-    lcd.setCursor(3,0);
-    if(server == playerA){
-      
-      lcd.print("Player A is");
-
-    }else{ //server == playerB
-      lcd.print("Player B is");
-    }
-    lcd.setCursor(3,1);
-    lcd.print("serving");
-    delay(2000);
-    lcd.clear();  
+    displayServer();
 
   } else if(buttonStateLeftPlus == LOW) {
     setScoreLeft++;
@@ -278,6 +266,26 @@ void turnOnServerLED(){
     digitalWrite(ledPin1, LOW);
     digitalWrite(ledPin2, HIGH);
   }
+}
+
+/**
+Displays the current server on the LCD screen 
+*/
+void displayServer()
+{
+    lcd.clear();
+    lcd.setCursor(3,0);
+    if(server == playerA){
+      
+      lcd.print("Player A is");
+
+    }else{ //server == playerB
+      lcd.print("Player B is");
+    }
+    lcd.setCursor(3,1);
+    lcd.print("serving");
+    delay(2000);
+    lcd.clear(); 
 }
 
 

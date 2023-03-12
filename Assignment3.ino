@@ -117,23 +117,17 @@ void loop()
 
   // Loop to increment game scores.
   if(setScoreLeft >= 11 && setScoreLeft >= setScoreRight + 2) {
+    
+    winner = -1;
+    
     printScore();
     delay(1000);
     gameScoreLeft++;
     setScoreLeft = 0;
     setScoreRight = 0;
 
-    /*** Blinks LED 3 times for the winner of the current set***/
-    while(flashCount > 0){ 
-      digitalWrite(ledPin1, HIGH);
-      digitalWrite(ledPin2, LOW); 
-      delay(200);              
-      digitalWrite(ledPin1, LOW);    
-      delay(200);  
-      flashCount--;
-    }
-    /*** Resets the flashcount to 3***/
-    flashCount = 3;
+    // blinks LED 3 times for the winner of the current set
+    blinkWinnerLED();
 
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
@@ -146,23 +140,18 @@ void loop()
     setPoint = setScore(setScoreLeft, setScoreRight); 
     
   } else if (setScoreRight >= 11 && setScoreRight >= setScoreLeft + 2) {
+
+    winner = 1;
+
     printScore();
     delay(1000);
     gameScoreRight++;
     setScoreLeft = 0;
     setScoreRight = 0;
 
-    /*** Blinks LED 3 times for the winner of the current set***/
-    while(flashCount > 0){
-      digitalWrite(ledPin2, HIGH);
-      digitalWrite(ledPin1, LOW); 
-      delay(200);              
-      digitalWrite(ledPin2, LOW);    
-      delay(200);  
-      flashCount--;
-    }
-    /*** Resets the flashcount to 3***/
-    flashCount = 3;
+    // blinks LED 3 times for the winner of the current set
+    blinkWinnerLED();
+
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
 
@@ -181,39 +170,30 @@ void loop()
     lcd.setCursor(1, 0);
     flashCount = 15;
     if(gameScoreLeft > gameScoreRight) {
+      winner = -1;
+
       if(playerA == -1){
         lcd.print("Player A Wins!");
       }
       else{
         lcd.print("Player B Wins!");
       }
-      while(flashCount > 0){
-        digitalWrite(ledPin2, HIGH);
-        digitalWrite(ledPin1, LOW); 
-        delay(200);              
-        digitalWrite(ledPin2, LOW);    
-        delay(200);  
-        flashCount--;
-      }    
-      delay(3000);
+    // blinks LED 3 times for the winner of the current set
+      blinkWinnerLED(); 
     }      
     else {
+      winner = 1;
       if(playerA == -1){
         lcd.print("Player B Wins!");
       }
       else{
         lcd.print("Player A Wins!");
       }
-      while(flashCount > 0){
-        digitalWrite(ledPin1, HIGH);
-        digitalWrite(ledPin2, LOW); 
-        delay(300);              
-        digitalWrite(ledPin1, LOW);    
-        delay(300);  
-        flashCount--;
-      }
-      delay(3000);
+      // blinks LED 3 times for the winner of the current set
+      blinkWinnerLED();
     }
+
+    delay(3000);
 
     gameScoreLeft =0;
     gameScoreRight = 0;
@@ -280,6 +260,33 @@ void displayServer()
     delay(2000);
     lcd.clear(); 
 }
+
+/**
+Blinks the LED on the side of the winner
+*/
+void blinkWinnerLED(){
+  int x;
+  int y;
+
+  if(winner == -1){
+    x = ledPin1;
+    y = ledPin2;
+  }else if(winner == 1) {
+    x = ledPin2;
+    y = ledPin1;
+  }
+    while(flashCount > 0){ 
+      digitalWrite(x, HIGH);
+      digitalWrite(y, LOW); 
+      delay(200);              
+      digitalWrite(x, LOW);    
+      delay(200);  
+      flashCount--;
+    }
+  // resets the flashcount to 3
+  flashCount = 3;
+}
+
 
 /** 
 Function to adjust the plusCountIncrement.

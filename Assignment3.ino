@@ -134,8 +134,9 @@ void loop()
     }
     /*** Resets the flashcount to 3***/
     flashCount = 3;
-    /*** Resets the plusCount increment to 1 for the next game***/
-    plusCountIncrement = 1;
+
+    //Adjusts the plusCount increment to 1 for the next game//
+    plusCountIncrement = checkCountIncrement();
  
     swapScoreboard();
 
@@ -164,8 +165,8 @@ void loop()
     }
     /*** Resets the flashcount to 3***/
     flashCount = 3;
-    /*** Resets the plusCount increment to 1 for the next game***/
-    plusCountIncrement = 1;
+    //Adjusts the plusCount increment to 1 for the next game//
+    plusCountIncrement = checkCountIncrement();
 
     swapScoreboard();    
 
@@ -238,11 +239,7 @@ void loop()
 
   printScore();
 
-  /*** When 10-10 is reached, changes the plusCountIncrement to 2
-  so that the server switches for every button press  ***/
-  if(setScoreLeft == 10 && setScoreRight == 10){
-      plusCountIncrement = 2;
-  }
+  plusCountIncrement = checkCountIncrement();
   /*** Every two points, the server switches ***/
   if(plusCount == 2){
       server = server * (-1);
@@ -286,6 +283,20 @@ void displayServer()
     lcd.print("serving");
     delay(2000);
     lcd.clear(); 
+}
+
+/** 
+Function to adjust the plusCountIncrement.
+@return The integer representing the plusCountIncrement.
+Returns 2 in the case of deuce, so that the server swaps for 
+every button press. Otherwise returns 1 */
+int checkCountIncrement(){
+
+    if(setScoreLeft >= 10 && setScoreRight >= 10){
+      return 2;
+    }else{
+      return 1;
+    }
 }
 
 

@@ -135,7 +135,6 @@ void loop()
 
     if(gameScoreLeft < 3 && gameScoreRight < 3){
       swapScoreboard();
-
       swapPlayerSide();
     } 
 
@@ -161,7 +160,6 @@ void loop()
 
     if(gameScoreLeft < 3 && gameScoreRight < 3){
       swapScoreboard();
-
       swapPlayerSide();
     } 
 
@@ -208,12 +206,8 @@ void loop()
     gameScore = setScore(gameScoreLeft, gameScoreRight);
     setPoint = setScore(setScoreLeft, setScoreRight);
     
-    /*** prompting the user to press the reset to start a new game***/
-    lcd.clear();
-    lcd.setCursor(0, 0);
-    lcd.print("Press reset to");
-    lcd.setCursor(0, 1);
-    lcd.print("start a new game");
+    //prompting the user to press the reset to start a new game//
+    resetPrompt();
 
     exit(0);
 
@@ -308,6 +302,18 @@ int checkCountIncrement(){
     }
 }
 
+
+
+/**
+Swaps the sides of the scoreboard when one set is over
+*/
+void swapScoreboard() {
+    int temp = gameScoreLeft;
+    gameScoreLeft = gameScoreRight;
+    gameScoreRight = temp; 
+  
+}
+
 /**
 Swap the sides at each player plays the game by multiplying 
 each player value by (-1)
@@ -317,13 +323,10 @@ void swapPlayerSide(){
   playerB *=(-1);
 }
 
-void swapScoreboard() {
-    int temp = gameScoreLeft;
-    gameScoreLeft = gameScoreRight;
-    gameScoreRight = temp; 
-  
-}
-
+/**
+Prints the current game score as well as the set points
+to the LCD screen
+*/
 void printScore(){
   //set cursor to column 0, row 0
   lcd.setCursor(0, 0);
@@ -334,4 +337,17 @@ void printScore(){
   //print the setpoint string over lcd
   lcd.print(setPoint);
 
+}
+
+/**
+Prints the message on the LCD screen to prompts the user to press
+the reset button on the Arduino to player a new game
+*/
+void resetPrompt(){
+      
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("Press reset to");
+    lcd.setCursor(0, 1);
+    lcd.print("start a new game");
 }

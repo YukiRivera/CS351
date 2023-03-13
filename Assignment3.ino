@@ -122,6 +122,8 @@ void loop()
     
     printScore();
     delay(1000);
+
+    // increments the gamescore and resets the set score to zero
     gameScoreLeft++;
     setScoreLeft = 0;
     setScoreRight = 0;
@@ -132,7 +134,7 @@ void loop()
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
  
-
+    // Swap the sides of the scoreboard and the players if no side has not won the entire game yet
     if(gameScoreLeft < 3 && gameScoreRight < 3){
       swapScoreboard();
       swapPlayerSide();
@@ -147,6 +149,8 @@ void loop()
 
     printScore();
     delay(1000);
+
+    // increments the gamescore and resets the set score to zero
     gameScoreRight++;
     setScoreLeft = 0;
     setScoreRight = 0;
@@ -157,7 +161,7 @@ void loop()
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
 
-
+    // Swap the sides of the scoreboard and the players if no side has not won the entire game yet
     if(gameScoreLeft < 3 && gameScoreRight < 3){
       swapScoreboard();
       swapPlayerSide();
@@ -168,12 +172,13 @@ void loop()
     
   } else{ /* Do nothing */}
 
-  /*** flashes the LEDs for the winner of the entire game ***/
+  // determines the winner of the entire game//
   if(gameScoreLeft == 3 || gameScoreRight == 3) {
     lcd.clear();
     lcd.setCursor(1, 0);
     flashCount = 15;
 
+    // sets the winner 
     if(gameScoreLeft > gameScoreRight) {
       winner = -1;
     }
@@ -182,7 +187,8 @@ void loop()
     }
 
     displayWinner();
-    // blinks LED 3 times for the winner of the current set
+
+    // blinks LED 15 times for the winner of the entire game
     blinkWinnerLED(); 
     
     delay(3000);
@@ -194,10 +200,14 @@ void loop()
 
   }
 
+  // prints the current scores on the scoreboard
   printScore();
 
+  // adjusts plusCountIncrement
   plusCountIncrement = checkCountIncrement();
-  /*** Every two points, the server switches ***/
+
+  /*Every two points, the server switches. When the set is deuce with 10-10, 
+  the server switches for every point */
   if(plusCount == 2){
       server = server * (-1);
       /*** Resets the count to zero***/ 

@@ -1,16 +1,16 @@
+/*
+    Assignment3: Arduino-based Ping Pong Game Score Tracking Accessory 
+    Name: Christopher Nevares, Lucas Rassbach, Yuki Rivera
+    Date: 03/12/2023
+    Course Code: CS351 - 6633 W-23
+    Description: This program is used by the .ino file which keeps track of the scores
+         of each player during a ping-pong game. The setScore() is the main function 
+         included in this .cpp file, which sets the scores for both players in the 
+         LCD screen.
+*/
+
+
 #include "scoreboard.h"
-
-// #include <iostream>
-
-// using namespace std;
-
-// int main(){
-//     char * item = setScore(0,0);
-//     for(int i = 0; i <16; i++){
-//         cout << "char" << *(item + i) << endl;
-//     }
-//     return 0;
-// }   
 
 char* setScore(int scoreOne, int scoreTwo){
     // TODO add a catch for if either score is 0

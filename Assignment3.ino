@@ -187,13 +187,6 @@ void loop()
     
     delay(3000);
 
-    gameScoreLeft =0;
-    gameScoreRight = 0;
-    setScoreLeft = 0;
-    setScoreRight =0;
-    gameScore = setScore(gameScoreLeft, gameScoreRight);
-    setPoint = setScore(setScoreLeft, setScoreRight);
-    
     //prompting the user to press the reset to start a new game//
     resetPrompt();
 

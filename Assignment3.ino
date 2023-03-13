@@ -132,9 +132,12 @@ void loop()
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
  
-    swapScoreboard();
 
-    swapPlayerSide();
+    if(gameScoreLeft < 3 && gameScoreRight < 3){
+      swapScoreboard();
+
+      swapPlayerSide();
+    } 
 
     gameScore = setScore(gameScoreLeft, gameScoreRight);
     setPoint = setScore(setScoreLeft, setScoreRight); 
@@ -155,9 +158,12 @@ void loop()
     //Adjusts the plusCount increment to 1 for the next game//
     plusCountIncrement = checkCountIncrement();
 
-    swapScoreboard();  
 
-    swapPlayerSide();  
+    if(gameScoreLeft < 3 && gameScoreRight < 3){
+      swapScoreboard();
+
+      swapPlayerSide();
+    } 
 
     gameScore = setScore(gameScoreLeft, gameScoreRight);
     setPoint = setScore(setScoreLeft, setScoreRight); 

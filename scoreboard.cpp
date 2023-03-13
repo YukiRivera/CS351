@@ -3,7 +3,7 @@
     Name: Christopher Nevares, Lucas Rassbach, Yuki Rivera
     Date: 03/12/2023
     Course Code: CS351 - 6633 W-23
-    Description: This program is used by the .ino file which keeps track of the scores
+    Description: This cpp file is used by the .ino file which keeps track of the scores
          of each player during a ping-pong game. The setScore() is the main function 
          included in this .cpp file, which sets the scores for both players in the 
          LCD screen.

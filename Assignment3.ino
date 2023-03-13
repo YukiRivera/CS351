@@ -173,30 +173,18 @@ void loop()
     lcd.clear();
     lcd.setCursor(1, 0);
     flashCount = 15;
+
     if(gameScoreLeft > gameScoreRight) {
       winner = -1;
-
-      if(playerA == -1){
-        lcd.print("Player A Wins!");
-      }
-      else{
-        lcd.print("Player B Wins!");
-      }
-    // blinks LED 3 times for the winner of the current set
-      blinkWinnerLED(); 
-    }      
-    else {
+    }
+    else{
       winner = 1;
-      if(playerA == -1){
-        lcd.print("Player B Wins!");
-      }
-      else{
-        lcd.print("Player A Wins!");
-      }
-      // blinks LED 3 times for the winner of the current set
-      blinkWinnerLED();
     }
 
+    displayWinner();
+    // blinks LED 3 times for the winner of the current set
+    blinkWinnerLED(); 
+    
     delay(3000);
 
     gameScoreLeft =0;
@@ -302,8 +290,6 @@ int checkCountIncrement(){
     }
 }
 
-
-
 /**
 Swaps the sides of the scoreboard when one set is over
 */
@@ -321,6 +307,18 @@ each player value by (-1)
 void swapPlayerSide(){
   playerA *=(-1);
   playerB *=(-1);
+}
+
+/**
+Displays the winner on the LCD screen
+*/
+void displayWinner(){
+  if(playerA == winner){
+    lcd.print("Player A Wins!");
+  }
+  else{
+    lcd.print("Player B Wins!");
+  }
 }
 
 /**
